@@ -144,7 +144,6 @@ void matrix_init_user(void) {
 
 // timers
 uint32_t anim_timer = 0;
-uint32_t anim_sleep = 0;
 
 // current frame
 uint8_t current_frame = 0;
@@ -317,19 +316,23 @@ static void render_luna(int LUNA_X, int LUNA_Y) {
         }
     }
 
+    // this goes first so that we exit this function with oled off instead of
+    // going into the animation_phase and possibly toggling the oled back on.
+#    if OLED_TIMEOUT > 0
+    if (last_input_activity_elapsed() > OLED_TIMEOUT && current_wpm == 0) {
+        oled_off();
+        return;
+    } else {
+        oled_on();
+    }
+#    endif
+
     // animation timer
     if (timer_elapsed32(anim_timer) > ANIM_FRAME_DURATION) {
         anim_timer = timer_read32();
         animation_phase();
     }
 
-    // this fixes the screen on and off bug
-    if (current_wpm > 0) {
-        oled_on();
-        anim_sleep = timer_read32();
-    } else if (timer_elapsed32(anim_sleep) > OLED_TIMEOUT) {
-        oled_off();
-    }
 }
 
 // KEYBOARD PET END
