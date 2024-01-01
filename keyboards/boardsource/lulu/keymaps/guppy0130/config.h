@@ -1,11 +1,16 @@
 #pragma once
 
 #define MASTER_LEFT // Left side is the master
-#define SPLIT_LED_STATE_ENABLE
-#define OLED_UPDATE_INTERVAL 10
+
+#ifdef OLED_ENABLE
+#    define OLED_UPDATE_INTERVAL 10
+#    define SPLIT_OLED_ENABLE
+#    define OLED_TIMEOUT 10000
+#endif
 
 #ifdef RGB_MATRIX_ENABLE
 // Configure RGB Matrix
+#    define SPLIT_LED_STATE_ENABLE
 #    undef RGB_MATRIX_MAXIMUM_BRIGHTNESS // from lulu config.h
 #    define RGB_MATRIX_MAXIMUM_BRIGHTNESS 120
 #    define RGB_MATRIX_KEYPRESSES // enable keypress effects
@@ -23,9 +28,9 @@
 #    undef ENABLE_RGB_MATRIX_BAND_SAT
 #    undef ENABLE_RGB_MATRIX_BAND_VAL
 // Enable RGB Matrix effects
-#    define ENABLE_RGB_MATRIX_BREATHING
-#    define ENABLE_RGB_MATRIX_TYPING_HEATMAP
-#    define ENABLE_RGB_MATRIX_SOLID_REACTIVE_SIMPLE
-#    define ENABLE_RGB_MATRIX_SOLID_COLOR
-#    define ENABLE_RGB_MATRIX_SOLID_REACTIVE_WIDE
+// #    define ENABLE_RGB_MATRIX_BREATHING
+// #    define ENABLE_RGB_MATRIX_TYPING_HEATMAP
+// #    define ENABLE_RGB_MATRIX_SOLID_REACTIVE_SIMPLE
+// #    define ENABLE_RGB_MATRIX_SOLID_COLOR
+// #    define ENABLE_RGB_MATRIX_SOLID_REACTIVE_WIDE
 #endif
