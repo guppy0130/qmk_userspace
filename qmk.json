@@ -4,6 +4,7 @@
         ["crkbd/rev1", "guppy0130"],
         ["boardsource/lulu/rp2040", "guppy0130"],
         ["sendyyeah/pix", "guppy0130"],
-        ["spaceman/2_milk", "guppy0130"]
+        ["spaceman/2_milk", "guppy0130"],
+        ["boardsource/unicorne", "guppy0130"]
     ]
 }
