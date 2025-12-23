@@ -53,13 +53,13 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             }
         } else {
             if (!clockwise) {
-                tap_code(KC_WH_D);
+                tap_code(QK_MOUSE_WHEEL_UP);
                 oled_set_cursor(get_icon_start_position(7), 3);
                 oled_write_P(PSTR(" "), false);
                 oled_set_cursor(get_icon_start_position(7), 2);
                 oled_write_P(UP_ICON, false);
             } else {
-                tap_code(KC_WH_U);
+                tap_code(QK_MOUSE_WHEEL_DOWN);
                 oled_set_cursor(get_icon_start_position(7), 2);
                 oled_write_P(PSTR(" "), false);
                 oled_set_cursor(get_icon_start_position(7), 3);
