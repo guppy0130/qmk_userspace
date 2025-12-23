@@ -1,0 +1,14 @@
+EXTRAKEY_ENABLE = yes
+MOUSEKEY_ENABLE = no
+CONSOLE_ENABLE = no
+LTO_ENABLE = yes
+
+WPM_ENABLE = yes
+OLED_ENABLE = yes
+NKRO_ENABLE = yes
+
+RGB_MATRIX_ENABLE = no
+RGBLIGHT_ENABLE = no
+
+# TODO: break this out into via userspace
+VIA_ENABLE = yes

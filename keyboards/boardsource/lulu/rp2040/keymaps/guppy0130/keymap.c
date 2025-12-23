@@ -16,15 +16,12 @@ extern rgblight_config_t rgblight_config;
 #define _LOWER 1
 #define _RAISE 2
 #define _ADJUST 3
-#define _GAMES 4
 
 enum custom_keycodes {
     QWERTY = SAFE_RANGE,
     LOWER,
     RAISE,
     ADJUST,
-    GAME_ON,
-    GAME_OF,
 };
 
 // clang-format off
@@ -74,7 +71,7 @@ LSFT_T(KC_TAB),   KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                     
 
   [_ADJUST] = LAYOUT( \
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      KC_SLEP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RGB_TOG,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, GAME_ON,\
+      KC_SLEP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -85,21 +82,6 @@ LSFT_T(KC_TAB),   KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                     
                                  KC_LGUI, KC_LGUI, KC_LALT,  LOWER,       RAISE, XXXXXXX, XXXXXXX, XXXXXXX \
                              //`-----------------------------------'  `-----------------------------------'
   ),
-
-  [_GAMES] = LAYOUT( \
-  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_ESC,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_BSPC,\
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-       KC_ESC,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  KC_BSPC,\
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-       KC_TAB ,   KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, GAME_OF,\
-  //|--------+--------+--------+--------+--------+--------|--------|  |--------|--------+--------+--------+--------+--------+--------|
-      KC_LCTL,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B, XXXXXXX,    XXXXXXX,    KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_ENT,\
-  //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                  KC_GRV, KC_GRV,  KC_SPC,  KC_SPC,      KC_SPC,  KC_SPC, KC_RALT, KC_RALT \
-                             //`-----------------------------------'  `-----------------------------------'
-  ),
-
 };
 // clang-format on
 
@@ -350,9 +332,6 @@ static void print_status_narrow(void) {
         case _QWERTY:
             oled_write("QWRTY", false);
             break;
-        case _GAMES:
-            oled_write("GAMES", false);
-            break;
         default:
             oled_write("UNDEF", false);
     }
@@ -367,9 +346,6 @@ static void print_status_narrow(void) {
     switch (get_highest_layer(layer_state)) {
         case _QWERTY:
             oled_write("Base ", false);
-            break;
-        case _GAMES:
-            oled_write("Games", false);
             break;
         case _RAISE:
             oled_write("Raise", false);
@@ -443,12 +419,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
             } else {
                 layer_off(_ADJUST);
             }
-            return false;
-        case GAME_ON:
-            default_layer_set(1UL << _GAMES);
-            return false;
-        case GAME_OF:
-            default_layer_set(1UL << _QWERTY);
             return false;
         case KC_LCTL:
         case KC_RCTL:

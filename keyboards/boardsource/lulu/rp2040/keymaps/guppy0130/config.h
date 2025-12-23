@@ -8,6 +8,10 @@
 #    define OLED_TIMEOUT 10000
 #endif
 
+#ifdef WPM_ENABLE
+#   define SPLIT_WPM_ENABLE
+#endif
+
 #ifdef RGB_MATRIX_ENABLE
 // Configure RGB Matrix
 #    define SPLIT_LED_STATE_ENABLE
